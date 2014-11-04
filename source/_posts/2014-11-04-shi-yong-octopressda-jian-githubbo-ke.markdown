@@ -63,7 +63,7 @@ categories:
 
 		rake generate
 		rake deploy
-现在可以访问http://username.github.com了。注意：有时候可能会有延时，要等几分钟才能打开。
+现在就可以访问username.github.com了。注意有可能要等几分钟才能打得开
 
 ##开始写博客
 使用Octopress提供的task创建一个博文

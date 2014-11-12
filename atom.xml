@@ -4,7 +4,7 @@
   <title><![CDATA[Apex]]></title>
   <link href="http://dongjinwei.github.io/atom.xml" rel="self"/>
   <link href="http://dongjinwei.github.io/"/>
-  <updated>2014-11-04T16:40:22+08:00</updated>
+  <updated>2014-11-12T14:48:51+08:00</updated>
   <id>http://dongjinwei.github.io/</id>
   <author>
     <name><![CDATA[Apex]]></name>
@@ -12,6 +12,60 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[IntelliJ IDEA + TOMCAT 创建web站点]]></title>
+    <link href="http://dongjinwei.github.io/blog/2014/11/11/intellij-idea-plus-tomcat-chuang-jian-webzhan-dian/"/>
+    <updated>2014-11-11T15:48:23+08:00</updated>
+    <id>http://dongjinwei.github.io/blog/2014/11/11/intellij-idea-plus-tomcat-chuang-jian-webzhan-dian</id>
+    <content type="html"><![CDATA[<h3>下载InterlliJ IDEA专业版</h3>
+
+<p>注意必须要是专业版，社区版是没有创建web application功能的，key可以从网上找到</p>
+
+<h3>创建web application</h3>
+
+<p><img src="http://img.hb.aicdn.com/3d31864c2f7e04020d7d2b847352c1818e6deed113511-JGktjx_fw658" alt="icon" /></p>
+
+<h3>本地下载tomcat并配置</h3>
+
+<p><img src="http://img.hb.aicdn.com/ecbca7f88f75b9297ba5699eb6a022f712dd24df17fc0-zkmMnk_fw658" alt="icon" />
+<img src="http://img.hb.aicdn.com/83529faa9f07c39e58b690b5a782074bf70913331a69d-AA7HnV_fw658" alt="icon" />
+<img src="http://img.hb.aicdn.com/00cd60d2f7cc6bc1a8f5f794d3b54a164ec0360113681-Wxnsmx_fw658" alt="icon" /></p>
+
+<h3>运行web app</h3>
+
+<p>完整结构：<img src="http://img.hb.aicdn.com/71232e1c0dae6121a46280d585d666e1bb5874ef7000-qx9LRh_fw658" alt="icon" />
+点击运行后，会自动启动tomcat，可以输入<a href="http://localhost:8080/">http://localhost:8080/</a>就行查看。</p>
+
+<h3>丰富网页内容</h3>
+
+<p>默认生成的index.jsp是个空页面，而且我们对html/css又不熟悉，如何丰富一下我们的页面呢。那就只能抄了，打开某个你中意的网站，右键查看源代码，直接拷贝其html源代码到我们的index.jsp或者index.html中，点击运行，然后再对照页面删删改改，改成我们所期望的界面</p>
+
+<h3>部署到云端</h3>
+
+<ol>
+<li>ssh登录到云主机</li>
+<li><p>下载tomcat并解压</p>
+
+<pre><code> wget http://apache.communilink.net/tomcat/tomcat-8/v8.0.14/bin/apache-tomcat-8.0.14.zip
+ unzip apache-tomcat-8.0.14.zip
+</code></pre></li>
+<li><p>传送本地app文件至云端。一般将工程打成war包，并将其放到tomcat的webapps文件夹下，tomcat将会自动解压此包。我直接将web工程文件夹放到webapps下也可以，如下</p>
+
+<pre><code> scp -r hello/ ssh root@xxx.xxx.xx.xx:/usr/local/apache-tomcat-8.0.14/webapps/
+</code></pre></li>
+<li><p>启动tomcat</p>
+
+<pre><code> cd tomcat
+ chmod 755 bin/*.sh
+ bin/startup.sh
+</code></pre>
+
+<p>至此，云端部署完毕，可以通过云主机ip访问了</p></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[使用Octopress搭建github博客]]></title>

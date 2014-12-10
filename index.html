@@ -9,7 +9,7 @@
   <meta name="author" content="Apex">
 
   
-  <meta name="description" content="一、问题 android dex文件方法数进行了限制，不能超过65k，因为google使用了short类型来存储方法数索引。随着工程越来越庞大，已经越来越接近这个数目，即将超越。为了解决这个问题，google在support包中推出了multidex，可以将代码编译成多个dex文件， &hellip;">
+  <meta name="description" content="痛点 由于公司使用stash系统，每次写完提交代码后，都需要登录到网页上指定多个人作为reviewer，有些麻烦，所以想写个ruby脚本，在脚本中将自己的经常指定的几个人作为reviewer固定，并在本地直接发起pull request，不再需要登陆到网页中重复这些工作 步骤 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,81 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/12/10/shi-yong-ming-ling-xing-ti-jiao-stash-pull-request/">使用命令行提交stash Pull Request</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-12-10T10:57:27+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>10:57 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>痛点</h3>
+
+<p>由于公司使用stash系统，每次写完提交代码后，都需要登录到网页上指定多个人作为reviewer，有些麻烦，所以想写个ruby脚本，在脚本中将自己的经常指定的几个人作为reviewer固定，并在本地直接发起pull request，不再需要登陆到网页中重复这些工作</p>
+
+<h3>步骤</h3>
+
+<ol>
+<li><p>下载stash命令行工具</p>
+
+<pre><code> gem install atlassian-stash
+</code></pre></li>
+<li><p>配置</p>
+
+<pre><code> $ stash configure
+ Stash Username: XXX
+ Stash Password (optional): XXXX
+ Stash URL: http://git.xxx.com
+ Create a git alias 'git create-pull-request' ? no
+</code></pre></li>
+<li><p>创建review.rb脚本</p>
+
+<pre><code> def main()
+     branch = "develop";
+     if (ARGV[0] != nil)
+         branch = ARGV[0]
+     end
+     system "stash pull-request #{branch} @1 @2 @3"
+ end
+
+ if __FILE__ == $0
+     main();
+ end
+</code></pre>
+
+<h3>提交代码</h3>
+
+<p>前几步没啥区别，就是在最后运行一下上面的脚本</p>
+
+<pre><code>  git add .
+  git commit -m "XXX"
+  git fetch
+  git rebase
+  git push origin featrue/XX
+  ruby review.rb origin/develop
+</code></pre></li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -360,6 +435,10 @@ sudo chmod 755 /usr/bin/xcrun
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/12/10/shi-yong-ming-ling-xing-ti-jiao-stash-pull-request/">使用命令行提交stash Pull Request</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/11/21/shi-yong-multidexjie-jue-android-65kfang-fa-shu-wen-ti/">使用Multidex解决Android 65K方法数问题</a>

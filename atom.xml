@@ -4,7 +4,7 @@
   <title><![CDATA[Apex]]></title>
   <link href="http://dongjinwei.github.io/atom.xml" rel="self"/>
   <link href="http://dongjinwei.github.io/"/>
-  <updated>2014-11-24T12:10:51+08:00</updated>
+  <updated>2014-12-10T11:14:03+08:00</updated>
   <id>http://dongjinwei.github.io/</id>
   <author>
     <name><![CDATA[Apex]]></name>
@@ -12,6 +12,61 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[使用命令行提交stash Pull Request]]></title>
+    <link href="http://dongjinwei.github.io/blog/2014/12/10/shi-yong-ming-ling-xing-ti-jiao-stash-pull-request/"/>
+    <updated>2014-12-10T10:57:27+08:00</updated>
+    <id>http://dongjinwei.github.io/blog/2014/12/10/shi-yong-ming-ling-xing-ti-jiao-stash-pull-request</id>
+    <content type="html"><![CDATA[<h3>痛点</h3>
+
+<p>由于公司使用stash系统，每次写完提交代码后，都需要登录到网页上指定多个人作为reviewer，有些麻烦，所以想写个ruby脚本，在脚本中将自己的经常指定的几个人作为reviewer固定，并在本地直接发起pull request，不再需要登陆到网页中重复这些工作</p>
+
+<h3>步骤</h3>
+
+<ol>
+<li><p>下载stash命令行工具</p>
+
+<pre><code> gem install atlassian-stash
+</code></pre></li>
+<li><p>配置</p>
+
+<pre><code> $ stash configure
+ Stash Username: XXX
+ Stash Password (optional): XXXX
+ Stash URL: http://git.xxx.com
+ Create a git alias 'git create-pull-request' ? no
+</code></pre></li>
+<li><p>创建review.rb脚本</p>
+
+<pre><code> def main()
+     branch = "develop";
+     if (ARGV[0] != nil)
+         branch = ARGV[0]
+     end
+     system "stash pull-request #{branch} @1 @2 @3"
+ end
+
+ if __FILE__ == $0
+     main();
+ end
+</code></pre>
+
+<h3>提交代码</h3>
+
+<p>前几步没啥区别，就是在最后运行一下上面的脚本</p>
+
+<pre><code>  git add .
+  git commit -m "XXX"
+  git fetch
+  git rebase
+  git push origin featrue/XX
+  ruby review.rb origin/develop
+</code></pre></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[使用Multidex解决Android 65K方法数问题]]></title>
